@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "756067668528",
+    "firebase_url": "https://cafemanager-e1fc5.firebaseio.com",
+    "project_id": "cafemanager-e1fc5",
+    "storage_bucket": "cafemanager-e1fc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756067668528:android:7bad255513cb36d2a993f5",
+        "android_client_info": {
+          "package_name": "com.company.cafemanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756067668528-oe4vha8sjfhb3dmiuj68q8eaq230rh0h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCit_yT9gg2hOLXxUAP6sWUE4xn6aNHwi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756067668528-oe4vha8sjfhb3dmiuj68q8eaq230rh0h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
