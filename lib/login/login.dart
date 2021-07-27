@@ -206,11 +206,13 @@ final _controller = TextEditingController();
                                         'own_number': '91$phoneNo',
                                       });
 
-                                                      Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (BuildContext context) => Index()));
+                                                      
 
                                       await AuthService().signInWithOTP(
                                             smsCode, verificationId);
+
+      //                                       Navigator.pushReplacement(
+      // context, MaterialPageRoute(builder: (BuildContext context) => Index()));
 
       //                                   Navigator.pushReplacement(
       // context, MaterialPageRoute(builder: (BuildContext context) => SignupDetails(phone: phoneNo)));
@@ -219,7 +221,13 @@ final _controller = TextEditingController();
 
 
                                      }}
-                                        : verifyPhone(phoneNo);
+                                        :verifyPhone(phoneNo);
+                                        
+                                        //  () async {
+                                        //   verifyPhone(phoneNo);
+                                        //   await AuthService().signInWithOTP(
+                                        //     smsCode, verificationId);
+                                        //   };
 //==================Changed
                                 // await FirebaseAuth.instance
                                 //         .currentUser()

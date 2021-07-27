@@ -1,5 +1,7 @@
+import 'package:Cafe_Manager/Menu/index-menu.dart';
 import 'package:Cafe_Manager/Menu/menu.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
@@ -11,7 +13,32 @@ class Index extends StatefulWidget {
 }
 
 class _IndexState extends State<Index> {
+  
+   String uid;
+
+  getid() {
+    var id = Firestore.instance.collection('user').document().documentID;
+    Firestore.instance.collection('user').document(id).setData({});
+    print(id);
+
+    setState(() {
+      uid = id;
+    });
+  }
+  
   @override
+  void initState() {
+     getid();
+    super.initState();
+  }
+  
+  
+  @override
+
+
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -436,7 +463,9 @@ class _IndexState extends State<Index> {
                               String cameraScanResult = await scanner.scan();
 print(cameraScanResult);
 if(cameraScanResult!=null){
-     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Menu(qr: cameraScanResult,)));
+ //    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Menu(qr: cameraScanResult,)));
+    
+     Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => Indexnew(qr: cameraScanResult, uid: uid,)));
                            
 }
                             },

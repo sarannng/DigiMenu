@@ -1,5 +1,6 @@
 import 'package:Cafe_Manager/Menu/menu.dart';
 import 'package:Cafe_Manager/index/index.dart';
+import 'package:Cafe_Manager/login/login.dart';
 import 'package:Cafe_Manager/login/welcome.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,7 +74,7 @@ class AuthService {
           if (snapshot.hasData) {
             return Index();
           } else {
-            return Welcome();
+            return Login();
           }
          
 
@@ -92,6 +93,9 @@ class AuthService {
     FirebaseAuth.instance.signInWithCredential(authCreds);
     BuildContext context;
     print('object');
+
+      Navigator.pushReplacement(
+      context, MaterialPageRoute(builder: (BuildContext context) => Index()));   
     // return Tabbar1();
   }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
  
+import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_picker/flutter_picker.dart';
@@ -13,9 +14,12 @@ final String qr;
 
   @override
   _MenuState createState() => _MenuState();
-}
- List<TextEditingController> flexContainer1 = new List();
+}  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<TextEditingController> flexContainer1 = new List();
 
+  int flexc1 = 0;
+  int flexc2;
+  int cartcount;
 class _MenuState extends State<Menu> {
   
   String cafename;
@@ -136,11 +140,37 @@ class _MenuState extends State<Menu> {
   Widget build(BuildContext context) {
 
 
+    incrementC1Flex(index) {
+      setState(() {
+        print(index);
+        print(flexContainer1[index].text);
+        flexc1 = flexc1 + 1;
+        var c1a = flexc1;
+        print(c1a);
+        flexContainer1[index].text = c1a.toString();
+      });
+    }
+
+    decrementC1Flex(index) {
+      setState(() {
+        flexc1 = flexc1 - 1;
+        print(flexc1);
+        if (flexc1 < 1) {
+          setState(() {
+            flexc1 = 1;
+          });
+        } else {
+          var c1b = flexc1;
+          flexContainer1[index].text = c1b.toString();
+        }
+      });
+    }
     
 
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
+
           elevation: 0.0,
           title: Text(
             '$cafename',
@@ -152,11 +182,39 @@ class _MenuState extends State<Menu> {
               ),
             ),
           ),
+
+          actions: [
+           Badge(
+                badgeColor: Colors.white,
+                position: BadgePosition.topEnd(end: -4),
+                badgeContent: Text(
+                  cartcount.toString(),
+                  style:
+                      TextStyle(color: Colors.indigoAccent, fontWeight: FontWeight.bold),
+                ),
+                child: IconButton(
+                  icon: Icon(Icons.shopping_cart, color: Colors.white),
+                  onPressed: () {
+                    // Navigator.push(
+                    //     context,
+                    //     // MaterialPageRoute(
+                    //     //     builder: (BuildContext context) =>
+                    //     //         Cart(uid: '${widget.uid}'))
+                    //             );
+                  },
+                ),
+              ),
+              
+            SizedBox(width: 20,)
+              
+              ], 
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient:
                   LinearGradient(colors: [Colors.lightBlue, Colors.indigo]),
             ),
+
+             
           ),
         ),
         body: Container(
@@ -453,7 +511,7 @@ class _MenuState extends State<Menu> {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             elevation: 8,
-                            child: Container(
+                            child: Container( //jere
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
@@ -639,7 +697,7 @@ class _MenuState extends State<Menu> {
                                                                             200),
                                                                     color: Colors
                                                                         .white),
-                                                                height: 100.0,
+                                                                height: 200.0,
                                                                 //color: Colors.transparent, //could change this to Color(0xFF737373),
                                                                 //so you don't have to change MaterialApp canvasColor
                                                                 child:
@@ -654,7 +712,7 @@ class _MenuState extends State<Menu> {
                                                                               mainAxisAlignment: MainAxisAlignment.center,
                                                                               children: [
                                                                                 Text(
-                                                                                  'Quantity',
+                                                                                  'Quantityy',
                                                                                   style: GoogleFonts.poppins(color: Colors.redAccent, fontWeight: FontWeight.w500, fontSize: 20),
                                                                                 )
                                                                               ],
@@ -662,7 +720,58 @@ class _MenuState extends State<Menu> {
                                                                             Row(
                                                                               children: [
 
-                                                                                
+                                                                                Text('Quantity'),
+
+                                                                                Row(
+                                                          children: <Widget>[
+                                                            Container(
+                                                              decoration:
+                                                                  BoxDecoration(),
+                                                              child: IconButton(
+                                                                icon: Icon(
+                                                                  Icons.add,
+                                                                  size: 15,
+                                                                ),
+                                                                onPressed: () {
+                                                                  // setState(() {
+                                                                  //   flexContainer1[index].text=  4.toString();
+                                                                  // });
+                                                                   incrementC1Flex(
+                                                                        index);
+                                                                  // print(value
+                                                                  //     .data
+                                                                  //     .values);
+                                                                },
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              width: 20,
+                                                              child: TextField(
+                                                                controller:
+                                                                    flexContainer1[
+                                                                        index],
+                                                                maxLength: 1,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                readOnly: true,
+                                                              ),
+                                                            ),
+                                                            Container(
+                                                              child: IconButton(
+                                                                icon: Icon(
+                                                                    Icons
+                                                                        .minimize,
+                                                                    size: 15),
+                                                                onPressed: () {
+                                                                  decrementC1Flex(
+                                                                      index);
+                                                                },
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )
+
                                                                               ],
                                                                             ),
                                                                             InkWell(
